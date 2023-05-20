@@ -1,12 +1,13 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 
-from rebalancer.api.viewsets import AccountPositionViewSet
+from rebalancer.api.views import ListAddAccount, AccountDetail, AccountPositionDetail, AddAccountPosition
 
-
-router = routers.DefaultRouter()
-router.register("account-positions", AccountPositionViewSet, basename="account-positions")
 
 urlpatterns = [
-    path("api/", include(router.urls)),
+    path("api/accounts", ListAddAccount.as_view(), name="all-accounts"),
+    path("api/accounts/<uuid:pk>/", AccountDetail.as_view(), name="account-detail"),
+    path("api/accounts/<uuid:pk>/account-positions/",
+         AddAccountPosition.as_view(), name="add-account-position"),
+    path("api/accounts/<uuid:pk>/account-positions/<uuid:position_pk>/",
+         AccountPositionDetail.as_view(), name="account-position-detail"),
 ]
