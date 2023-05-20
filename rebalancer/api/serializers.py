@@ -7,3 +7,4 @@ class AccountPositionSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountPosition
         fields = ["id", "ticker", "shares"]
+        read_only_fields = ("id",)
